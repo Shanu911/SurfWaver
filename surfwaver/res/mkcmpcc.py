@@ -100,7 +100,7 @@ class CMPCC():
                             exist, ind = findIndex(self.cmpcc_dict[offset], space)
                             if exist:
                                 #print(offset, space) #, self.cmpcc_tr[laynum[offset]])
-                                self.cmpcc_tr[laynum[offset]][ind] = stack(self.cmpcc_tr[laynum[offset]][ind] + xcorr) # for k in range(xcorr.size)]
+                                self.cmpcc_tr[laynum[offset]][ind] = stack(self.cmpcc_tr[laynum[offset]][ind], xcorr) # for k in range(xcorr.size)]
                             else:
                                 #print(offset, space)
                                 self.cmpcc_tr[laynum[offset]].append(xcorr.tolist())
@@ -114,7 +114,7 @@ class CMPCC():
                             #print(offset, space)
                             l+=1
                         b+=1
-        print(self.cmpcc_dict)
+        #print(self.cmpcc_dict)
         self.srdata.update({"gather_dict": self.cmpcc_dict})
         self.trdata.update({"TraceData": self.cmpcc_tr})
         jsonobj1 = json.dumps(self.srdata, indent=1)
@@ -131,7 +131,7 @@ class CMPCC():
                 f2.close()
             return (True,self.sint, self.sampsize, len(list(self.cmpcc_dict.keys())))
         except:
-            print("json file made unsuccessful")
+            #print("json file made unsuccessful")
             return (False,self.sint, self.sampsize, len(list(self.cmpcc_dict.keys())))
 
     def saveplot(self, flder):
