@@ -64,7 +64,7 @@ class Main(QMainWindow, Ui_MainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
         self.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon('../icons/logo.png'))
+        self.setWindowIcon(QtGui.QIcon('icons/logo.png'))
         self.OpenFiles_btn.clicked.connect(self.OpenFile)
         self.apply_btn.clicked.connect(self.apply)
         self.clrAll_btn.clicked.connect(self.clearAll)
