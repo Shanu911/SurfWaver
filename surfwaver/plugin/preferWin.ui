@@ -1,0 +1,1230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>734</width>
+    <height>582</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>SurfWaver - Preference edit</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../icons/logo.png</normaloff>../icons/logo.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_5">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="maximumSize">
+       <size>
+        <width>707</width>
+        <height>451</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 75 10pt &quot;Verdana&quot;;</string>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Gather Section </string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="leftMargin">
+         <number>5</number>
+        </property>
+        <property name="topMargin">
+         <number>5</number>
+        </property>
+        <property name="rightMargin">
+         <number>5</number>
+        </property>
+        <property name="bottomMargin">
+         <number>5</number>
+        </property>
+        <item>
+         <widget class="QFrame" name="frame_2">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>51</height>
+           </size>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <widget class="QLabel" name="label">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>10</y>
+             <width>131</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>131</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Set Root directory*</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="rootdir">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>10</y>
+             <width>351</width>
+             <height>31</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="gs_selct_dir_btn">
+           <property name="geometry">
+            <rect>
+             <x>520</x>
+             <y>10</y>
+             <width>151</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>151</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Open file maneger</string>
+           </property>
+          </widget>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox">
+          <property name="title">
+           <string>Image Properties</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <property name="leftMargin">
+            <number>9</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>9</number>
+           </property>
+           <item>
+            <widget class="QGroupBox" name="groupBox_2">
+             <property name="maximumSize">
+              <size>
+               <width>650</width>
+               <height>131</height>
+              </size>
+             </property>
+             <property name="title">
+              <string>Aquisition Geometry</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_26">
+                <property name="text">
+                 <string>Original        </string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="6">
+               <widget class="QLineEdit" name="gsagoridpi">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="5">
+               <widget class="QLabel" name="label_23">
+                <property name="text">
+                 <string> DPI</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLabel" name="label_20">
+                <property name="text">
+                 <string>Plot height</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="3">
+               <widget class="QLabel" name="label_19">
+                <property name="maximumSize">
+                 <size>
+                  <width>78</width>
+                  <height>22</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string> Width</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0" colspan="4">
+               <widget class="QRadioButton" name="radioButton">
+                <property name="text">
+                 <string>Use same values for CMPCC plot parameters</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QLineEdit" name="gsagcmpcch">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="4">
+               <widget class="QLineEdit" name="gsagcmpccw">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="4">
+               <widget class="QLineEdit" name="gsagoriw">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QLineEdit" name="gsagorih">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="6">
+               <widget class="QLineEdit" name="gsagcmpccdpi">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="label_24">
+                <property name="minimumSize">
+                 <size>
+                  <width>80</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Plot height</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="3">
+               <widget class="QLabel" name="label_21">
+                <property name="text">
+                 <string> Width</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_22">
+                <property name="text">
+                 <string>     CMPCC  </string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="5">
+               <widget class="QLabel" name="label_25">
+                <property name="text">
+                 <string> DPI</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_3">
+             <property name="maximumSize">
+              <size>
+               <width>571</width>
+               <height>81</height>
+              </size>
+             </property>
+             <property name="title">
+              <string>Gather Tab</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_2">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_29">
+                <property name="text">
+                 <string>   Plot height</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="gsgth"/>
+              </item>
+              <item row="0" column="2">
+               <widget class="QLabel" name="label_27">
+                <property name="text">
+                 <string>        Width</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="3">
+               <widget class="QLineEdit" name="gsgtw"/>
+              </item>
+              <item row="0" column="4">
+               <widget class="QLabel" name="label_28">
+                <property name="text">
+                 <string>      DPI</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="5">
+               <widget class="QLineEdit" name="gsgtdpi"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_4">
+             <property name="maximumSize">
+              <size>
+               <width>571</width>
+               <height>81</height>
+              </size>
+             </property>
+             <property name="title">
+              <string>Amplitude Spectrum Tab</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_3">
+              <item row="0" column="4">
+               <widget class="QLabel" name="label_32">
+                <property name="text">
+                 <string>      DPI</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_30">
+                <property name="text">
+                 <string>    Plot height</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QLabel" name="label_31">
+                <property name="text">
+                 <string>        Width</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="5">
+               <widget class="QLineEdit" name="gsastdpi"/>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="gsasth"/>
+              </item>
+              <item row="0" column="3">
+               <widget class="QLineEdit" name="gsastw"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Dispersion Section</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QGroupBox" name="DataDispGrpBox">
+          <property name="maximumSize">
+           <size>
+            <width>683</width>
+            <height>111</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 75 12pt &quot;Verdana&quot;;</string>
+          </property>
+          <property name="title">
+           <string>Dispersion Parameters</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="0" column="0" colspan="2">
+            <widget class="QLabel" name="label_18">
+             <property name="styleSheet">
+              <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
+             </property>
+             <property name="text">
+              <string>Trim             Start</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QLineEdit" name="trStrt_edt">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background:rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>0.0</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="3">
+            <widget class="QLabel" name="label_4">
+             <property name="styleSheet">
+              <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
+             </property>
+             <property name="text">
+              <string> End</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="4">
+            <widget class="QLineEdit" name="trEnd_edt">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background:rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>1.0</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="5">
+            <widget class="QLabel" name="label_12">
+             <property name="styleSheet">
+              <string notr="true">font: 10pt &quot;Cambria&quot;;</string>
+             </property>
+             <property name="text">
+              <string>Noise</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="6">
+            <widget class="QLabel" name="label_11">
+             <property name="styleSheet">
+              <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
+             </property>
+             <property name="text">
+              <string>Start</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="7" colspan="2">
+            <widget class="QLineEdit" name="nStrt_edt">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background:rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>0.6</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="9">
+            <widget class="QLabel" name="label_10">
+             <property name="styleSheet">
+              <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
+             </property>
+             <property name="text">
+              <string>End</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="10">
+            <widget class="QLineEdit" name="nEnd_edt">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background:rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>0.9</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_6">
+             <property name="styleSheet">
+              <string notr="true">font: 10pt &quot;Cambria&quot;;</string>
+             </property>
+             <property name="text">
+              <string>Frequency</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="label_13">
+             <property name="styleSheet">
+              <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
+             </property>
+             <property name="text">
+              <string> Min</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QLineEdit" name="fMin_edt">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background:rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>10</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="3">
+            <widget class="QLabel" name="label_5">
+             <property name="styleSheet">
+              <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
+             </property>
+             <property name="text">
+              <string>Max</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="4">
+            <widget class="QLineEdit" name="fmax_edt">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background:rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>100</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="5">
+            <widget class="QLabel" name="label_14">
+             <property name="styleSheet">
+              <string notr="true">font: 10pt &quot;Cambria&quot;;</string>
+             </property>
+             <property name="text">
+              <string>Velocity</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="6">
+            <widget class="QLabel" name="label_17">
+             <property name="styleSheet">
+              <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
+             </property>
+             <property name="text">
+              <string>Min</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="7" colspan="2">
+            <widget class="QLineEdit" name="vMin_edt">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background:rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>100</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="9">
+            <widget class="QLabel" name="label_15">
+             <property name="styleSheet">
+              <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
+             </property>
+             <property name="text">
+              <string>Max</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="10">
+            <widget class="QLineEdit" name="vMax_edt">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background:rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>500</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_8">
+             <property name="styleSheet">
+              <string notr="true">font: 10pt &quot;Cambria&quot;;</string>
+             </property>
+             <property name="text">
+              <string>Signal</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLabel" name="label_9">
+             <property name="styleSheet">
+              <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
+             </property>
+             <property name="text">
+              <string>Start</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QLineEdit" name="sigStrt_edt">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background:rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>0.0</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="3">
+            <widget class="QLabel" name="label_7">
+             <property name="styleSheet">
+              <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
+             </property>
+             <property name="text">
+              <string>End</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="4">
+            <widget class="QLineEdit" name="sigEnd_edt">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background:rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>0.6</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="5" colspan="3">
+            <widget class="QLabel" name="label_16">
+             <property name="styleSheet">
+              <string notr="true">font: 10pt &quot;Cambria&quot;;</string>
+             </property>
+             <property name="text">
+              <string>Velocity steps</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="8">
+            <widget class="QLineEdit" name="vstep">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background:rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>100</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_5">
+          <property name="title">
+           <string>Image Properties</string>
+          </property>
+          <widget class="QGroupBox" name="gsection">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>26</y>
+             <width>571</width>
+             <height>81</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>571</width>
+             <height>81</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>Gather Section</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_5">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_41">
+              <property name="text">
+               <string>   Plot height</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="5">
+             <widget class="QLineEdit" name="dsgsdpi"/>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="dsgsh"/>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="label_42">
+              <property name="text">
+               <string>        Width</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="4">
+             <widget class="QLabel" name="label_43">
+              <property name="text">
+               <string>      DPI</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QLineEdit" name="dsgsw"/>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QGroupBox" name="groupBox_8">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>110</y>
+             <width>571</width>
+             <height>81</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>571</width>
+             <height>81</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>Geometry Section</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_6">
+            <item row="0" column="4">
+             <widget class="QLabel" name="label_44">
+              <property name="text">
+               <string>      DPI</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_45">
+              <property name="text">
+               <string>    Plot height</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="label_46">
+              <property name="text">
+               <string>        Width</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="5">
+             <widget class="QLineEdit" name="dsgeosdpi"/>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="dsgeosh"/>
+            </item>
+            <item row="0" column="3">
+             <widget class="QLineEdit" name="dsgeosw"/>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QGroupBox" name="groupBox_9">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>200</y>
+             <width>571</width>
+             <height>81</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>571</width>
+             <height>81</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>Dispersion curve Section</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_7">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_47">
+              <property name="text">
+               <string>   Plot height</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="dsdcsh"/>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="label_48">
+              <property name="text">
+               <string>        Width</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QLineEdit" name="dsdcsw"/>
+            </item>
+            <item row="0" column="4">
+             <widget class="QLabel" name="label_49">
+              <property name="text">
+               <string>      DPI</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="5">
+             <widget class="QLineEdit" name="dsdcsdpi"/>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Inversion Section</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QGroupBox" name="groupBox_6">
+          <property name="title">
+           <string>Image Properties</string>
+          </property>
+          <widget class="QGroupBox" name="groupBox_10">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>26</y>
+             <width>571</width>
+             <height>81</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>571</width>
+             <height>81</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>Dispersion curve Canvas</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_8">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_50">
+              <property name="text">
+               <string>   Plot height</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="5">
+             <widget class="QLineEdit" name="isdccdpi"/>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="isdcch"/>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="label_51">
+              <property name="text">
+               <string>        Width</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="4">
+             <widget class="QLabel" name="label_52">
+              <property name="text">
+               <string>      DPI</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QLineEdit" name="isdccw"/>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QGroupBox" name="groupBox_11">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>110</y>
+             <width>571</width>
+             <height>81</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>571</width>
+             <height>81</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>Misfit canvas</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_9">
+            <item row="0" column="4">
+             <widget class="QLabel" name="label_53">
+              <property name="text">
+               <string>      DPI</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_54">
+              <property name="text">
+               <string>    Plot height</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="label_55">
+              <property name="text">
+               <string>        Width</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="5">
+             <widget class="QLineEdit" name="ismcdpi"/>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="ismch"/>
+            </item>
+            <item row="0" column="3">
+             <widget class="QLineEdit" name="ismcw"/>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QGroupBox" name="groupBox_12">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>200</y>
+             <width>571</width>
+             <height>81</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>571</width>
+             <height>81</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>Final model Canvas</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_10">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_56">
+              <property name="text">
+               <string>   Plot height</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="isfmch"/>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="label_57">
+              <property name="text">
+               <string>        Width</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QLineEdit" name="isfmcw"/>
+            </item>
+            <item row="0" column="4">
+             <widget class="QLabel" name="label_58">
+              <property name="text">
+               <string>      DPI</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="5">
+             <widget class="QLineEdit" name="isfmcdpi"/>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="DataDispGrpBox_2">
+          <property name="maximumSize">
+           <size>
+            <width>683</width>
+            <height>110</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 75 10pt &quot;Verdana&quot;;</string>
+          </property>
+          <property name="title">
+           <string>2d Inversion image properties</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <widget class="QGroupBox" name="groupBox_13">
+             <property name="maximumSize">
+              <size>
+               <width>571</width>
+               <height>81</height>
+              </size>
+             </property>
+             <property name="title">
+              <string>Model Canvas</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_11">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_59">
+                <property name="text">
+                 <string>   Plot height</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="is2dmch"/>
+              </item>
+              <item row="0" column="2">
+               <widget class="QLabel" name="label_60">
+                <property name="text">
+                 <string>        Width</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="3">
+               <widget class="QLineEdit" name="is2dmcw"/>
+              </item>
+              <item row="0" column="4">
+               <widget class="QLabel" name="label_61">
+                <property name="text">
+                 <string>      DPI</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="5">
+               <widget class="QLineEdit" name="is2dmcdpi"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="frame">
+      <property name="maximumSize">
+       <size>
+        <width>735</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>20</y>
+         <width>331</width>
+         <height>81</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>1. Root directory is the directory where all images and files will be saved which will be made during program running. 
+ 2. More DPI means more process time.</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="apply_btn">
+       <property name="geometry">
+        <rect>
+         <x>500</x>
+         <y>30</y>
+         <width>111</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Apply </string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="reset_btn">
+       <property name="geometry">
+        <rect>
+         <x>620</x>
+         <y>30</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Reset</string>
+       </property>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

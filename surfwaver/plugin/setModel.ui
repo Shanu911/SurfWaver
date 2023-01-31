@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>setModelWin</class>
+ <widget class="QMainWindow" name="setModelWin">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>844</width>
+    <height>602</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>SurfWaver - Set initial model parameters</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../icons/logo.png</normaloff>../icons/logo.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="leftMargin">
+     <number>5</number>
+    </property>
+    <property name="topMargin">
+     <number>5</number>
+    </property>
+    <property name="rightMargin">
+     <number>5</number>
+    </property>
+    <property name="bottomMargin">
+     <number>5</number>
+    </property>
+    <item>
+     <widget class="QGroupBox" name="SetPrioriModel">
+      <property name="maximumSize">
+       <size>
+        <width>914</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 75 12pt &quot;Verdana&quot;;</string>
+      </property>
+      <property name="title">
+       <string>Set Priori model</string>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="leftMargin">
+        <number>5</number>
+       </property>
+       <property name="topMargin">
+        <number>5</number>
+       </property>
+       <property name="rightMargin">
+        <number>5</number>
+       </property>
+       <property name="bottomMargin">
+        <number>5</number>
+       </property>
+       <item>
+        <widget class="QFrame" name="frame">
+         <property name="minimumSize">
+          <size>
+           <width>400</width>
+           <height>541</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>400</width>
+           <height>541</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <property name="leftMargin">
+           <number>2</number>
+          </property>
+          <property name="topMargin">
+           <number>2</number>
+          </property>
+          <property name="rightMargin">
+           <number>2</number>
+          </property>
+          <property name="bottomMargin">
+           <number>2</number>
+          </property>
+          <item row="0" column="0" colspan="2">
+           <widget class="QLabel" name="label">
+            <property name="minimumSize">
+             <size>
+              <width>271</width>
+              <height>45</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>271</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 75 9pt &quot;Verdana&quot;;</string>
+            </property>
+            <property name="text">
+             <string>Open a csv/excel file that contains initial model parameters or set data manually in the below table</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QPushButton" name="open">
+            <property name="minimumSize">
+             <size>
+              <width>111</width>
+              <height>31</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>119</width>
+              <height>31</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Spreedsheet Format #1, header keys -&amp;gt; [&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; font-weight:400; color:#ce9178;&quot;&gt;&amp;quot;zinf&amp;quot;&lt;/span&gt;&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; font-weight:400; color:#d4d4d4;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; font-weight:400; color:#ce9178;&quot;&gt;&amp;quot;zsup&amp;quot;&lt;/span&gt;&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; font-weight:400; color:#d4d4d4;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; font-weight:400; color:#ce9178;&quot;&gt;&amp;quot;vpinf&amp;quot;&lt;/span&gt;&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; font-weight:400; color:#d4d4d4;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; font-weight:400; color:#ce9178;&quot;&gt;&amp;quot;vpsup&amp;quot;&lt;/span&gt;&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; font-weight:400; color:#d4d4d4;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; font-weight:400; color:#ce9178;&quot;&gt;&amp;quot;vsinf&amp;quot;&lt;/span&gt;&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; font-weight:400; color:#d4d4d4;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; font-weight:400; color:#ce9178;&quot;&gt;&amp;quot;vssup&amp;quot;&lt;/span&gt;&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; font-weight:400; color:#d4d4d4;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; font-weight:400; color:#ce9178;&quot;&gt;&amp;quot;rhinf&amp;quot;&lt;/span&gt;&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; font-weight:400; color:#d4d4d4;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; font-weight:400; color:#ce9178;&quot;&gt;&amp;quot;rhsup&amp;quot;]&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Spreedsheet Format #2, header keys -&amp;gt; [&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; color:#ce9178;&quot;&gt;&amp;quot;z&amp;quot;, &amp;quot;vp&amp;quot;&lt;/span&gt;&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; color:#d4d4d4;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; color:#ce9178;&quot;&gt;&amp;quot;vs&amp;quot;&lt;/span&gt;&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; color:#d4d4d4;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; color:#ce9178;&quot;&gt;&amp;quot;rh&amp;quot;]&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 75 9pt &quot;Verdana&quot;;</string>
+            </property>
+            <property name="text">
+             <string>Choose file</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="3">
+           <widget class="QFrame" name="frame_2">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 75 10pt &quot;Verdana&quot;;</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <widget class="QLabel" name="label_3">
+             <property name="geometry">
+              <rect>
+               <x>190</x>
+               <y>60</y>
+               <width>191</width>
+               <height>20</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 8pt &quot;Verdana&quot;;</string>
+             </property>
+             <property name="text">
+              <string>*** to know what should be the </string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="link">
+             <property name="geometry">
+              <rect>
+               <x>310</x>
+               <y>80</y>
+               <width>71</width>
+               <height>20</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color:rgb(200, 0, 0);
+font:75 8pt &quot;Verdana&quot;;
+text-decoration: underline;
+background-color:rgb(255, 255, 0);</string>
+             </property>
+             <property name="text">
+              <string>&lt;a href=&quot;https://github.com/Shanu911/SurfWaver/blob/main/docs/Coming_Soon.txt&quot;&gt; click here &lt;/a&gt;</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="openExternalLinks">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_5">
+             <property name="geometry">
+              <rect>
+               <x>160</x>
+               <y>80</y>
+               <width>141</width>
+               <height>16</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 8pt &quot;Verdana&quot;;</string>
+             </property>
+             <property name="text">
+              <string>spreedsheet file formats</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_6">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>5</y>
+               <width>111</width>
+               <height>16</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Error bound (%)</string>
+             </property>
+            </widget>
+            <widget class="QLineEdit" name="lineEdit">
+             <property name="geometry">
+              <rect>
+               <x>140</x>
+               <y>0</y>
+               <width>251</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="toolTip">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;If each key has a different error bound, then use commas (,) to separate the error bounds of each key,&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;otherwise type a single value.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 75 11pt &quot;Verdana&quot;;</string>
+             </property>
+             <property name="text">
+              <string>0.0</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_7">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>25</y>
+               <width>371</width>
+               <height>31</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 8pt &quot;Verdana&quot;;</string>
+             </property>
+             <property name="text">
+              <string>* Error bound needed only for spreedsheet with 4 columns 
+(format #2)</string>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="set">
+             <property name="geometry">
+              <rect>
+               <x>30</x>
+               <y>60</y>
+               <width>100</width>
+               <height>31</height>
+              </rect>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>31</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>31</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 75 11pt &quot;Calibri&quot;;
+background: rgb(85, 255, 127)</string>
+             </property>
+             <property name="text">
+              <string>Set data</string>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QPushButton" name="autofill_btn">
+            <property name="minimumSize">
+             <size>
+              <width>115</width>
+              <height>31</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>130</width>
+              <height>31</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 75 9pt &quot;Verdana&quot;;</string>
+            </property>
+            <property name="text">
+             <string>Auto-fill</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0" colspan="3">
+           <widget class="Line" name="line">
+            <property name="maximumSize">
+             <size>
+              <width>396</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="3">
+           <widget class="QTableWidget" name="tableWidget">
+            <property name="minimumSize">
+             <size>
+              <width>388</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>396</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 75 9pt &quot;Verdana&quot;;</string>
+            </property>
+            <property name="sizeAdjustPolicy">
+             <enum>QAbstractScrollArea::AdjustToContents</enum>
+            </property>
+            <attribute name="horizontalHeaderDefaultSectionSize">
+             <number>130</number>
+            </attribute>
+            <column>
+             <property name="text">
+              <string>Key</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Infirior limit</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Supirior limit</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QPushButton" name="SaveAndClose">
+            <property name="minimumSize">
+             <size>
+              <width>121</width>
+              <height>31</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>133</width>
+              <height>31</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 75 9pt &quot;Verdana&quot;;</string>
+            </property>
+            <property name="text">
+             <string>Save and close</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QPushButton" name="displayplots_btn">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>31</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>31</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 75 9pt &quot;Verdana&quot;;</string>
+            </property>
+            <property name="text">
+             <string>Show plots</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTabWidget" name="tabWidget">
+         <property name="styleSheet">
+          <string notr="true">font: 75 9pt &quot;Verdana&quot;;</string>
+         </property>
+         <property name="currentIndex">
+          <number>2</number>
+         </property>
+         <widget class="QWidget" name="tab">
+          <attribute name="title">
+           <string>Vp model</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QScrollArea" name="sa_1">
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>390</width>
+                <height>495</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="hl1"/>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="tab_2">
+          <attribute name="title">
+           <string>Vs model</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QScrollArea" name="sa_2">
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents_2">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>390</width>
+                <height>495</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="hl2"/>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="tab_3">
+          <attribute name="title">
+           <string>Density model</string>
+          </attribute>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QScrollArea" name="sa_3">
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents_3">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>390</width>
+                <height>495</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="hl3"/>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="tab_4">
+          <attribute name="title">
+           <string>PR model</string>
+          </attribute>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QScrollArea" name="sa_4">
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents_4">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>390</width>
+                <height>495</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="hl4"/>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
