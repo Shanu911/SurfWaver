@@ -7,7 +7,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>815</width>
+    <width>859</width>
     <height>637</height>
    </rect>
   </property>
@@ -298,7 +298,7 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>172</width>
+                <width>175</width>
                 <height>199</height>
                </rect>
               </property>
@@ -353,7 +353,7 @@
            </size>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="AquGeomTab">
            <attribute name="title">
@@ -375,7 +375,7 @@
             <item>
              <widget class="QTabWidget" name="GatherAquTabSection">
               <property name="currentIndex">
-               <number>0</number>
+               <number>1</number>
               </property>
               <widget class="QWidget" name="Original">
                <attribute name="title">
@@ -853,7 +853,7 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>593</width>
+                 <width>634</width>
                  <height>471</height>
                 </rect>
                </property>
@@ -1051,7 +1051,7 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>593</width>
+                 <width>634</width>
                  <height>471</height>
                 </rect>
                </property>
@@ -1073,7 +1073,7 @@
          <number>5</number>
         </property>
         <property name="topMargin">
-         <number>5</number>
+         <number>0</number>
         </property>
         <property name="rightMargin">
          <number>5</number>
@@ -1083,6 +1083,12 @@
         </property>
         <item>
          <widget class="QGroupBox" name="DataDispGrpBox">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>120</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
@@ -1095,444 +1101,603 @@
           <property name="title">
            <string>Data for generating dispersion curve</string>
           </property>
-          <layout class="QGridLayout" name="gridLayout_5">
-           <item row="0" column="14">
-            <widget class="QWidget" name="widget_6" native="true">
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <property name="leftMargin">
+            <number>9</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>5</number>
+           </property>
+           <property name="bottomMargin">
+            <number>5</number>
+           </property>
+           <item>
+            <widget class="QScrollArea" name="scrollArea_11">
              <property name="minimumSize">
               <size>
-               <width>5</width>
+               <width>400</width>
+               <height>90</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>850</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 8pt &quot;Verdana&quot;;</string>
+             </property>
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents_17">
+              <property name="geometry">
+               <rect>
+                <x>-57</x>
+                <y>0</y>
+                <width>673</width>
+                <height>76</height>
+               </rect>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_9">
+               <property name="leftMargin">
+                <number>5</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>5</number>
+               </property>
+               <property name="bottomMargin">
+                <number>2</number>
+               </property>
+               <property name="horizontalSpacing">
+                <number>6</number>
+               </property>
+               <property name="verticalSpacing">
+                <number>0</number>
+               </property>
+               <item row="1" column="8">
+                <widget class="QLineEdit" name="nStrt_edt">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background:rgb(255, 255, 255)</string>
+                 </property>
+                 <property name="text">
+                  <string>0.6</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="9">
+                <widget class="QLabel" name="label_10">
+                 <property name="styleSheet">
+                  <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string>End</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="7">
+                <widget class="QLabel" name="label_15">
+                 <property name="styleSheet">
+                  <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string>Min</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="12">
+                <widget class="QLabel" name="label_16">
+                 <property name="styleSheet">
+                  <string notr="true">font: 10pt &quot;Cambria&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string>Velocity Space</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QLineEdit" name="trStrt_edt">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background:rgb(255, 255, 255)</string>
+                 </property>
+                 <property name="text">
+                  <string>0.0</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="4">
+                <widget class="QLineEdit" name="trEnd_edt">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background:rgb(255, 255, 255)</string>
+                 </property>
+                 <property name="text">
+                  <string>1.0</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0" colspan="2">
+                <widget class="QLabel" name="label_2">
+                 <property name="styleSheet">
+                  <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string>Trim             Start</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="9">
+                <widget class="QLabel" name="label_13">
+                 <property name="styleSheet">
+                  <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string>Max</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="10">
+                <widget class="QLineEdit" name="vMax_edt">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background:rgb(255, 255, 255)</string>
+                 </property>
+                 <property name="text">
+                  <string>500</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0" colspan="3">
+                <widget class="QCheckBox" name="trim_chk">
+                 <property name="styleSheet">
+                  <string notr="true">font: 10pt &quot;Cambria&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string>Enable Trimming</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="7">
+                <widget class="QLabel" name="label_9">
+                 <property name="styleSheet">
+                  <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string>Start</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="11">
+                <widget class="QFrame" name="frame_3">
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="6">
+                <widget class="QLabel" name="label_12">
+                 <property name="styleSheet">
+                  <string notr="true">font: 10pt &quot;Cambria&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string>Noise</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="5">
+                <widget class="QFrame" name="frame_2">
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="13">
+                <widget class="QComboBox" name="vspace_edt">
+                 <property name="styleSheet">
+                  <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>linear</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>log</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item row="2" column="2">
+                <widget class="QLineEdit" name="fMin_edt">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background:rgb(255, 255, 255)</string>
+                 </property>
+                 <property name="text">
+                  <string>10</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="6">
+                <widget class="QLabel" name="label_14">
+                 <property name="styleSheet">
+                  <string notr="true">font: 10pt &quot;Cambria&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string>Velocity</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3">
+                <widget class="QLabel" name="label_5">
+                 <property name="styleSheet">
+                  <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string>Max</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="8">
+                <widget class="QLineEdit" name="sigStrt_edt">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background:rgb(255, 255, 255)</string>
+                 </property>
+                 <property name="text">
+                  <string>0.0</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="9">
+                <widget class="QLabel" name="label_7">
+                 <property name="styleSheet">
+                  <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string>End</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="10">
+                <widget class="QLineEdit" name="sigEnd_edt">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background:rgb(255, 255, 255)</string>
+                 </property>
+                 <property name="text">
+                  <string>0.6</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="7">
+                <widget class="QLabel" name="label_11">
+                 <property name="styleSheet">
+                  <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string>Start</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_4">
+                 <property name="minimumSize">
+                  <size>
+                   <width>50</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">font: 10pt &quot;Cambria&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string>Frequency</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="4">
+                <widget class="QLineEdit" name="fmax_edt">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background:rgb(255, 255, 255)</string>
+                 </property>
+                 <property name="text">
+                  <string>100</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="12">
+                <widget class="QLabel" name="label_25">
+                 <property name="styleSheet">
+                  <string notr="true">font: 10pt &quot;Cambria&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string>Transform </string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="12">
+                <widget class="QLabel" name="label_19">
+                 <property name="styleSheet">
+                  <string notr="true">font: 10pt &quot;Cambria&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string>Min traces</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="13">
+                <widget class="QSpinBox" name="minTraces">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>23</height>
+                  </size>
+                 </property>
+                 <property name="minimum">
+                  <number>2</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_6">
+                 <property name="styleSheet">
+                  <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string> Min</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3">
+                <widget class="QLabel" name="label_3">
+                 <property name="styleSheet">
+                  <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string> End</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_8">
+                 <property name="styleSheet">
+                  <string notr="true">font: 10pt &quot;Cambria&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string>Signal</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="13">
+                <widget class="QComboBox" name="TransformType">
+                 <property name="styleSheet">
+                  <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>fk</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>phaseshift</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>slantstack</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>fdbf</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item row="2" column="8">
+                <widget class="QLineEdit" name="vMin_edt">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background:rgb(255, 255, 255)</string>
+                 </property>
+                 <property name="text">
+                  <string>100</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="10">
+                <widget class="QLineEdit" name="nEnd_edt">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background:rgb(255, 255, 255)</string>
+                 </property>
+                 <property name="text">
+                  <string>0.9</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QScrollArea" name="scrollArea_12">
+             <property name="minimumSize">
+              <size>
+               <width>170</width>
                <height>0</height>
               </size>
              </property>
              <property name="maximumSize">
-              <size>
-               <width>20</width>
-               <height>16777215</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="7">
-            <widget class="QLabel" name="label_8">
-             <property name="styleSheet">
-              <string notr="true">font: 10pt &quot;Cambria&quot;;</string>
-             </property>
-             <property name="text">
-              <string>Signal</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="7">
-            <widget class="QLabel" name="label_12">
-             <property name="styleSheet">
-              <string notr="true">font: 10pt &quot;Cambria&quot;;</string>
-             </property>
-             <property name="text">
-              <string>Noise</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="10">
-            <widget class="QLineEdit" name="vMin_edt">
-             <property name="maximumSize">
-              <size>
-               <width>100</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background:rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string>100</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="15">
-            <widget class="QLabel" name="label_16">
-             <property name="styleSheet">
-              <string notr="true">font: 10pt &quot;Cambria&quot;;</string>
-             </property>
-             <property name="text">
-              <string>Velocity Space</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="13">
-            <widget class="QLineEdit" name="sigEnd_edt">
-             <property name="maximumSize">
-              <size>
-               <width>100</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background:rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string>0.6</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="9">
-            <widget class="QLabel" name="label_9">
-             <property name="styleSheet">
-              <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
-             </property>
-             <property name="text">
-              <string>Start</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="5">
-            <widget class="QLineEdit" name="fmax_edt">
-             <property name="maximumSize">
-              <size>
-               <width>100</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background:rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string>100</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="15">
-            <widget class="QLabel" name="label_25">
-             <property name="styleSheet">
-              <string notr="true">font: 10pt &quot;Cambria&quot;;</string>
-             </property>
-             <property name="text">
-              <string>Transform </string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="9">
-            <widget class="QLabel" name="label_11">
-             <property name="styleSheet">
-              <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
-             </property>
-             <property name="text">
-              <string>Start</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="16">
-            <widget class="QComboBox" name="TransformType">
-             <property name="styleSheet">
-              <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
-             </property>
-             <item>
-              <property name="text">
-               <string>FK</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Phase Shift</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Radon</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item row="0" column="10">
-            <widget class="QLineEdit" name="sigStrt_edt">
-             <property name="maximumSize">
-              <size>
-               <width>100</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background:rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string>0.0</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="4">
-            <widget class="QLabel" name="label_5">
-             <property name="styleSheet">
-              <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
-             </property>
-             <property name="text">
-              <string>Max</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="5">
-            <widget class="QLineEdit" name="trEnd_edt">
-             <property name="maximumSize">
-              <size>
-               <width>100</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background:rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="13">
-            <widget class="QLineEdit" name="nEnd_edt">
-             <property name="maximumSize">
-              <size>
-               <width>100</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background:rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string>0.9</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="4">
-            <widget class="QLabel" name="label_3">
-             <property name="styleSheet">
-              <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
-             </property>
-             <property name="text">
-              <string> End</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="6">
-            <widget class="QWidget" name="widget" native="true">
-             <property name="minimumSize">
-              <size>
-               <width>5</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>20</width>
-               <height>16777215</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="17">
-            <spacer name="horizontalSpacer">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="2" column="13">
-            <widget class="QLineEdit" name="vMax_edt">
-             <property name="maximumSize">
-              <size>
-               <width>100</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background:rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string>500</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="15" colspan="2">
-            <widget class="QPushButton" name="doDisp_btn">
-             <property name="minimumSize">
               <size>
                <width>180</width>
-               <height>26</height>
+               <height>16777215</height>
               </size>
              </property>
-             <property name="font">
-              <font>
-               <family>Calibri</family>
-               <pointsize>11</pointsize>
-               <weight>9</weight>
-               <italic>false</italic>
-               <bold>false</bold>
-              </font>
-             </property>
              <property name="styleSheet">
-              <string notr="true">font: 75 11pt &quot;Calibri&quot;;
+              <string notr="true">font: 75 10pt &quot;Cambria&quot;;</string>
+             </property>
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents_19">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>178</width>
+                <height>93</height>
+               </rect>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_5">
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="verticalSpacing">
+                <number>2</number>
+               </property>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_26">
+                 <property name="minimumSize">
+                  <size>
+                   <width>110</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Median filter width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QSpinBox" name="filterWidth">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>23</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>48</width>
+                   <height>23</height>
+                  </size>
+                 </property>
+                 <property name="minimum">
+                  <number>3</number>
+                 </property>
+                 <property name="value">
+                  <number>5</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0" colspan="2">
+                <widget class="QPushButton" name="doDisp_btn">
+                 <property name="minimumSize">
+                  <size>
+                   <width>150</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>Calibri</family>
+                   <pointsize>10</pointsize>
+                   <weight>9</weight>
+                   <italic>false</italic>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">font: 75 10pt &quot;Calibri&quot;;
 background: rgb(85, 255, 127)</string>
-             </property>
-             <property name="text">
-              <string>Generate Dispersion Curves</string>
-             </property>
+                 </property>
+                 <property name="text">
+                  <string>Generate
+ Dispersion Curves</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
             </widget>
            </item>
-           <item row="0" column="12">
-            <widget class="QLabel" name="label_7">
-             <property name="styleSheet">
-              <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
+           <item>
+            <widget class="QFrame" name="frame">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
              </property>
-             <property name="text">
-              <string>End</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_4">
-             <property name="styleSheet">
-              <string notr="true">font: 10pt &quot;Cambria&quot;;</string>
-             </property>
-             <property name="text">
-              <string>Frequency</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="3">
-            <widget class="QLineEdit" name="fMin_edt">
-             <property name="maximumSize">
-              <size>
-               <width>100</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background:rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string>10</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="7">
-            <widget class="QLabel" name="label_14">
-             <property name="styleSheet">
-              <string notr="true">font: 10pt &quot;Cambria&quot;;</string>
-             </property>
-             <property name="text">
-              <string>Velocity</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="12">
-            <widget class="QLabel" name="label_10">
-             <property name="styleSheet">
-              <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
-             </property>
-             <property name="text">
-              <string>End</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QLabel" name="label_6">
-             <property name="styleSheet">
-              <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
-             </property>
-             <property name="text">
-              <string> Min</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="3">
-            <widget class="QLineEdit" name="trStrt_edt">
-             <property name="maximumSize">
-              <size>
-               <width>100</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background:rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string>0.0</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0" colspan="4">
-            <widget class="QCheckBox" name="trim_chk">
-             <property name="styleSheet">
-              <string notr="true">font: 10pt &quot;Cambria&quot;;</string>
-             </property>
-             <property name="text">
-              <string>Enable Trimming</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="16">
-            <widget class="QComboBox" name="vspace_edt">
-             <property name="styleSheet">
-              <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
-             </property>
-             <item>
-              <property name="text">
-               <string>linear</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>log</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item row="1" column="10">
-            <widget class="QLineEdit" name="nStrt_edt">
-             <property name="maximumSize">
-              <size>
-               <width>100</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background:rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string>0.6</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="12">
-            <widget class="QLabel" name="label_13">
-             <property name="styleSheet">
-              <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
-             </property>
-             <property name="text">
-              <string>Max</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="9">
-            <widget class="QLabel" name="label_15">
-             <property name="styleSheet">
-              <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
-             </property>
-             <property name="text">
-              <string>Min</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0" colspan="2">
-            <widget class="QLabel" name="label_2">
-             <property name="styleSheet">
-              <string notr="true">font: 10pt &quot;Calibri&quot;;</string>
-             </property>
-             <property name="text">
-              <string>Trim             Start</string>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
              </property>
             </widget>
            </item>
@@ -1621,7 +1786,7 @@ background: rgb(85, 255, 127)</string>
                 <x>0</x>
                 <y>0</y>
                 <width>479</width>
-                <height>324</height>
+                <height>320</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -1695,7 +1860,7 @@ background: rgb(85, 255, 127)</string>
               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Manually pick dispersion curve&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="text">
-              <string>Pick Manually</string>
+              <string>Advance Pick</string>
              </property>
             </widget>
            </item>
@@ -1741,8 +1906,8 @@ background: rgb(85, 255, 127)</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>301</width>
-                <height>386</height>
+                <width>344</width>
+                <height>390</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1826,7 +1991,7 @@ background: rgb(85, 255, 127)</string>
         <item row="1" column="5" rowspan="3">
          <widget class="QTabWidget" name="tabWidget_2">
           <property name="currentIndex">
-           <number>1</number>
+           <number>3</number>
           </property>
           <widget class="QWidget" name="evrything">
            <attribute name="title">
@@ -1900,8 +2065,8 @@ background: rgb(85, 255, 127)</string>
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>366</width>
-                 <height>438</height>
+                 <width>71</width>
+                 <height>31</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -1990,8 +2155,8 @@ background: rgb(85, 255, 127)</string>
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>71</width>
-                 <height>31</height>
+                 <width>410</width>
+                 <height>438</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -2126,6 +2291,9 @@ background: rgb(85, 255, 127)</string>
             <width>70</width>
             <height>31</height>
            </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 75 12pt &quot;Verdana&quot;;</string>
           </property>
          </widget>
         </item>
@@ -2456,7 +2624,7 @@ background: rgb(85, 255, 127)</string>
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>755</width>
+                 <width>799</width>
                  <height>459</height>
                 </rect>
                </property>
@@ -2590,7 +2758,7 @@ background: rgb(85, 255, 127)</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>815</width>
+     <width>859</width>
      <height>21</height>
     </rect>
    </property>

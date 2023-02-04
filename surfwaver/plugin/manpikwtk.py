@@ -4,6 +4,7 @@ import json
 from PIL import Image, ImageTk
 import os
 import math
+from attrdict import AttrDict
 
 BTN_FONT = ('Ariel',11,'bold')
 
@@ -11,8 +12,18 @@ def main():
     window = manWindow()
     window.mainloop()
 
+def RootDir():      
+    filename = "log/settings.json"  
+    try:
+        file= open(filename, "r")
+        data = AttrDict(json.load(file))
+        return data.gframe.rootdir
+    except:
+        print(f"Preference settings file -> {filename} not found")
+        return None
+    
 class manWindow(tk.Tk):
-    def __init__(self, vmn=100, vmx=500, fmx=100, fmn=1):
+    def __init__(self):
         super().__init__()
         
         min_win_w = 400
@@ -27,21 +38,27 @@ class manWindow(tk.Tk):
         except AttributeError:
             titleBar_h =  max_win_w*10/1366
 
+        with open("log/disper_peaks.json", "r") as f:
+            jobj = json.load(f)
+            self.vmn = int(jobj['v_phase_lim'][0])
+            self.vmx = int(jobj['v_phase_lim'][1])
+            self.fmn = int(jobj['freq_lim'][0])
+            self.fmx = int(jobj['freq_lim'][1])
+
         max_win_h = self.winfo_screenheight() - titleBar_h
         rto = ((15,2), (272, 144))
         pad = int(max_win_w/rto[1][0])
         self.pad = pad
-        self.file = open("tmp/dispersion/dispdata.json", 'r') 
+
+        self.ROOT = RootDir()
+        
+        self.file = open(self.ROOT + "/dispersion/dispdata.json", 'r') 
         self.data = json.load(self.file)
         self.cmpcc_loc = list(self.data['disp_dict'].keys())
         self.len = len(self.cmpcc_loc)
         self.sc = StringVar()
         self.slocidnx = 0
         self.flag = 0
-        self.vmn = vmn  
-        self.vmx = vmx
-        self.fmn = fmn
-        self.fmx = fmx
         self.samplesDict = dict()  # contains frequency, velocity and ids
         
         btnfrme_w = int(max_win_w*rto[0][1]/(sum(rto[0])))
@@ -69,11 +86,12 @@ class manWindow(tk.Tk):
 
         self.cnvs = Canvas(self.cnvsFrame, width=self.cnvs_w, height=self.cnvs_h, bg="#fff")
         self.cnvs.place(x=2,y=2)
-        self.plot()
+        
         self.dots = Dots(canvas=self.cnvs, pad=pad, xmn=self.xmn, xmx=self.xmx, ymn=self.ymn, ymx=self.ymx, fmn=self.fmn, fmx=self.fmx, vmn=self.vmn, vmx= self.vmx)
-
+        self.plot()
         
 
+        #========== functionalities in left side ======================================#
         self.sloc = Label(self.btnfrme, text="Source @", font=BTN_FONT, fg='#248aa2')
         self.sloc.place(x=pad, y= pad+3+10)
         self.leftbtn = Button(self.btnfrme, text="<", command=self.prevsr, font=BTN_FONT ,width=2)
@@ -157,7 +175,7 @@ class manWindow(tk.Tk):
     
 
     def plot(self):
-        loc = "tmp/dispersion/dispOri/src-"+self.cmpcc_loc[self.slocidnx]+".png"
+        loc = self.ROOT + "/dispersion/dispOri/src-"+self.cmpcc_loc[self.slocidnx]+".png"
         self.sc.set(self.cmpcc_loc[self.slocidnx])
         var1 = Image.open(loc)
         var2 = var1.resize((int(self.xmx-self.xmn), int(self.ymx-self.ymn)))
@@ -175,7 +193,7 @@ class manWindow(tk.Tk):
                 t = v - dec            
                 self.cnvs.create_line(self.xmn-self.pad*3, y, self.xmn, y, width= 2, tags='ln')
                 self.cnvs.create_text(self.xmn-self.pad*5, y, text=t, angle=90)
-                dec -= self.vmn
+                dec -= 100
             else:
                 self.cnvs.create_line(self.xmn-self.pad*2, y, self.xmn, y, width= 1, tags='ln')
         f = self.fmx
@@ -266,7 +284,7 @@ class manWindow(tk.Tk):
     
     def exportdata(self):
         keys = list(self.samplesDict.keys())
-        fname = 'tmp/inversion/inver.json'
+        fname = self.ROOT + '/inversion/inver.json'
         if os.path.isfile(fname):
             file = open(fname, 'r')        
             jobj = json.load(file)
