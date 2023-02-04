@@ -302,7 +302,7 @@ class Array1D():
         traces = self.timeseriesmatrix(detrend=amplitude_detrend,
                                        normalize=amplitude_normalization)
         positions = self.position(normalize=position_normalization)
-        print(positions)
+        #print(positions)
         if amplitude_scale is None:
             amplitude_scale = np.mean(np.diff(positions))/2
         for i, position in enumerate(positions):
@@ -337,7 +337,7 @@ class Array1D():
                                          positions[-1]+spacing)
         getattr(ax, "grid")(axis=time_ax, linestyle=":")
         getattr(ax, f"set_{time_ax}label")("Time (s)")
-        getattr(ax, f"set_{dist_ax}label")("Distance (m)")
+        getattr(ax, f"set_{dist_ax}label")("Spacings")  #(modified)
 
         for label in list("xy"):
             ax.tick_params(label, length=4, width=1, which='major')

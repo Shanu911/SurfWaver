@@ -113,7 +113,7 @@ class AbstractWavefieldTransform(ABC):
         to_norm, to_abs = register[by]
         self.power, self._to_abs = (to_norm(self.power), to_abs(self.power))
 
-    def find_peak_power(self, by="frequency-maximum", **kwargs):
+    def find_peak_power(self, by="frequency-maximum", width=5, **kwargs):
         """Find maximum `WavefieldTransform` power.
 
         Parameters
@@ -135,7 +135,8 @@ class AbstractWavefieldTransform(ABC):
 
         """
         if by == "frequency-maximum":
-            return self.velocities[np.argmax(self.power, axis=0)]
+            vel = self.velocities[np.argmax(self.power, axis=0)]
+            return self.median_filter(vel, width)
         else:
             msg = f"find_peak_power by {by} not recognized, see docs for options."
             raise NotImplementedError(msg)
@@ -168,10 +169,19 @@ class AbstractWavefieldTransform(ABC):
         if ax_was_none:
             fig.tight_layout()
             return (fig, ax)
-
+        
+    def median_filter(self, arr, width):                  # (modified)
+        result = []
+        for i in range(len(arr)):
+            start = max(0, i - width // 2)
+            end = min(len(arr), i + width // 2 + 1)
+            result.append(sorted(arr[start:end])[len(arr[start:end]) // 2])
+        return result
+    
     def plot(self, fig=None, ax=None, cax=None,
              normalization="frequency-maximum", peaks="frequency-maximum",
-             nearfield=None, cmap="jet", peak_kwargs=None, colorbar_kwargs=None, rasterize=False, fname=None):
+             nearfield=None, cmap="jet", peak_kwargs=None, colorbar_kwargs=None, 
+             rasterize=False, fname=None, filterwidth=5):
         """Plot the `WavefieldTransform`'s dispersion image.
 
         Parameters
@@ -256,7 +266,7 @@ class AbstractWavefieldTransform(ABC):
             
 
         if peaks != "none":
-            selected_peaks = self.find_peak_power(by=peaks)
+            selected_peaks = self.find_peak_power(by=peaks, width=filterwidth)
             default_kwargs = dict(marker="o", markersize=1, markeredgecolor="w",
                                   markerfacecolor='none', linestyle="none")
             peak_kwargs = {} if peak_kwargs is None else peak_kwargs
