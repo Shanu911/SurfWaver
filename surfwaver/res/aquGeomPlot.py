@@ -3,8 +3,10 @@ import obspy
 import os
 import json
 import numpy as np
+from res import threads
 from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)
 
+    
 def original(filespath, jsonpath):
     srclocs = []
     rcvrlocs = []
@@ -42,14 +44,17 @@ def FindLocs(strm, isSeg2):
             rcvrloc.append(float(trace.stats.segy.trace_header.group_coordinate_x))
         return srcloc, rcvrloc
 
-def plot(file, rootdir):
+def plot(file):
+    prefdata = threads.Prefdata()
+    rootdir = prefdata.gframe.rootdir
+    fig, ax = plt.subplots(figsize=(prefdata.gframe.AquGeom.original.w, prefdata.gframe.AquGeom.original.h), 
+                           dpi=prefdata.gframe.AquGeom.original.dpi)
+
 
     f = open(file, "r")
     data = json.load(f)
     src = data["src_locs"]
     rcvr = data["rcvr_locs"]    
-
-    fig, ax = plt.subplots(figsize=(10,5), dpi=300)
 
     for i, sensor in enumerate(rcvr):
         ax1 = ax.plot(src[i], (i+1), 'r*', ms=15, markeredgewidth=0.5, markeredgecolor="k")    
@@ -74,15 +79,17 @@ def plot(file, rootdir):
     ax.legend((ax1[0], ax2[0]), ("Source", "Receiver"), loc='upper center', bbox_to_anchor=(0.5, -0.05),
           fancybox=False, shadow=False, ncol=2, frameon=False)
 
-    fig.savefig(rootdir+"/gather_img/oriaqugraph.jpg", dpi=300, bbox_inches='tight', pad_inches=0.2)
+    fig.savefig(rootdir+"/gather_img/oriaqugraph.jpg", bbox_inches='tight', pad_inches=0.2)
     f.close()
     
     return
 
 
-def plotCMPCCgeom(offset, spacings, rootdir):   
-
-    fig, ax = plt.subplots(figsize=(10,5), dpi=300)
+def plotCMPCCgeom(offset, spacings):   
+    prefdata = threads.Prefdata()
+    rootdir = prefdata.gframe.rootdir
+    fig, ax = plt.subplots(figsize=(prefdata.gframe.AquGeom.cmpcc.w, prefdata.gframe.AquGeom.cmpcc.h),
+                            dpi=prefdata.gframe.AquGeom.cmpcc.dpi)
 
     for i, sensor in enumerate(spacings):
         ycorr = [offset[i]]*len(sensor)
@@ -104,7 +111,7 @@ def plotCMPCCgeom(offset, spacings, rootdir):
             
     #ax.legend((ax1[0]), ("Cross corelated trace"), loc='upper center', bbox_to_anchor=(0.5, -0.05),
     #      fancybox=False, shadow=False, ncol=1, frameon=False)
-    fig.savefig(rootdir + "/gather_img/cmpccGeomgraph.jpg", dpi=300, bbox_inches='tight', pad_inches=0.2)
+    fig.savefig(rootdir + "/gather_img/cmpccGeomgraph.jpg", bbox_inches='tight', pad_inches=0.2)
     plt.ioff()
     plt.clf()
     plt.close(fig)
