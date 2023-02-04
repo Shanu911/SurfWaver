@@ -6,7 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from multiprocessing import Process
-from threads import ModelPlots
+from res.threads import ModelPlots
 from PyQt5 import QtWidgets, QtGui
 import time
 
