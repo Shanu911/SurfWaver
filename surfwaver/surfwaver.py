@@ -7,8 +7,7 @@ import sys
 from PyQt5.QtWidgets import QFileDialog, QMainWindow, QApplication 
 from PyQt5 import QtCore, QtWidgets, QtGui
 import os
-from res import aquGeomPlot, writelog
-import threads
+from res import aquGeomPlot, writelog, threads
 import shutil
 from PyQt5.QtGui import QPixmap
 import json
@@ -77,9 +76,8 @@ class Main(QMainWindow, Ui_MainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
         self.setupUi(self)
-        self.pref = writelog.sysParam()
-        self.ROOT = self.pref.getrootdir()
-
+        
+        self.setGlobalVariables()
         self.setWindowIcon(QtGui.QIcon('icons/logo.png'))
         self.OpenFiles_btn.clicked.connect(self.OpenFile)
         self.apply_btn.clicked.connect(self.apply)
@@ -133,7 +131,14 @@ class Main(QMainWindow, Ui_MainWindow):
             self.statusBar.setStyleSheet("color: red")
             self.statusBar.showMessage("Error occurred during new root settings")
         
-    
+    def setGlobalVariables(self):
+        self.start_inv = True
+
+        self.pref = writelog.sysParam()
+        self.ROOT = self.pref.getrootdir()
+
+        self.start_dispersion =True
+
 
     def setModelParam(self):
         if self.numLay_spin.value() >=2: 
@@ -201,14 +206,14 @@ class Main(QMainWindow, Ui_MainWindow):
     def plotOriginalAquGeom(self):
         jfile = self.ROOT+"/gatherdata/originalLocData.json"
         if os.path.exists(jfile):
-            aquGeomPlot.plot(jfile, self.ROOT)
+            aquGeomPlot.plot(jfile)
             self.statusBar.showMessage("Image saved")
             scene = QtWidgets.QGraphicsScene(self)
             pixmap = QPixmap(self.ROOT+"/gather_img/oriaqugraph.jpg")
             item = QtWidgets.QGraphicsPixmapItem(pixmap)
             scene.addItem(item)
             self.oriAquGeom_Canv.setScene(scene)
-            self.oriAquGeom_Canv.fitInView(scene.sceneRect(), QtCore.Qt.KeepAspectRatio)
+            #self.oriAquGeom_Canv.fitInView(scene.sceneRect(), QtCore.Qt.KeepAspectRatio)
         else:
             self.statusBar.showMessage("No data found !!")
 
@@ -223,14 +228,14 @@ class Main(QMainWindow, Ui_MainWindow):
         if os.path.exists(jfile):
             offset, spacings = binning(self.binsize_sbx.value(), jfile)
             #print(offset, spacings)
-            aquGeomPlot.plotCMPCCgeom(offset, spacings, self.ROOT)
+            aquGeomPlot.plotCMPCCgeom(offset, spacings)
             self.statusBar.showMessage("Image saved")
             scene = QtWidgets.QGraphicsScene(self)
             pixmap = QPixmap(self.ROOT+"/gather_img/cmpccGeomgraph.jpg")
             item = QtWidgets.QGraphicsPixmapItem(pixmap)
             scene.addItem(item)
             self.cmpccAquGeom_Canv.setScene(scene)
-            self.cmpccAquGeom_Canv.fitInView(scene.sceneRect(), QtCore.Qt.KeepAspectRatio)
+            #self.cmpccAquGeom_Canv.fitInView(scene.sceneRect(), QtCore.Qt.KeepAspectRatio)
 
         else:
             self.statusBar.showMessage("No data found !!")
@@ -286,7 +291,7 @@ class Main(QMainWindow, Ui_MainWindow):
         
         
         W = self.ampSpecScrollArea.viewport().width()
-        self.w, num_of_plots_in_a_Row = findWidth(W, 500)
+        self.w, num_of_plots_in_a_Row = findWidth(W, 800)
 
         srcDictFile = self.ROOT+"/gatherdata/srcdata.json"
         traceDictFile = self.ROOT+"/gatherdata/trcdata.json"
@@ -310,9 +315,9 @@ class Main(QMainWindow, Ui_MainWindow):
         label = f"ampSpecPlotlabel_{i}"
         self.ampSpecPlotlabel = QtWidgets.QLabel(label, self.ampSpecScrollArea)
         pixmap = QPixmap(fname)
-        pixmap = pixmap.scaledToWidth(self.w)
+        # pixmap = pixmap.scaledToWidth(self.w)
         #print(pixmap.width(), pixmap.height())  #get size hint
-        self.ampSpecPlotlabel.resize(self.w, pixmap.height()+2)
+        self.ampSpecPlotlabel.resize(pixmap.width()+4, pixmap.height()+2)
         self.ampSpecPlotlabel.setPixmap(pixmap)
         self.gridLayout_a.addWidget(self.ampSpecPlotlabel, rnum, cnum) 
         self.ampSpecPlotlabel.show()
@@ -329,32 +334,59 @@ class Main(QMainWindow, Ui_MainWindow):
 
         """
         
+        if self.start_dispersion:
+            dispdata = {
+                "trimstat": self.trim_chk.isChecked(),"trim_begin" : float(self.trStrt_edt.text()),
+                "trim_end" : float(self.trEnd_edt.text()),"fmin":float(self.fMin_edt.text()),"fmax":float(self.fmax_edt.text()),
+                "vmin": float(self.vMin_edt.text()),"vmax": float(self.vMax_edt.text()),"signal_begin": float(self.sigStrt_edt.text()),
+                "signal_end":float(self.sigEnd_edt.text()),"noise_begin":float(self.nStrt_edt.text()),
+                "transform": self.TransformType.currentText(), "noise_end":float(self.nEnd_edt.text()),
+                "vspace":self.vspace_edt.currentText(),"nvel": 400, "mintrace":self.minTraces.value()
+            }
 
-        dispdata = {
-            "trimstat": self.trim_chk.isChecked(),"trim_begin" : self.trStrt_edt.text(),
-            "trim_end" : self.trEnd_edt.text(),"fmin":self.fMin_edt.text(),"fmax":self.fmax_edt.text(),
-            "vmin":self.vMin_edt.text(),"vmax":self.vMax_edt.text(),"signal_begin":self.sigStrt_edt.text(),
-            "signal_end":self.sigEnd_edt.text(),"noise_begin":self.nStrt_edt.text(),
-            "noise_end":self.nEnd_edt.text(),"vspace":self.vspace_edt.currentText(),"nvel": 400
-        }
+            disper_peakdata = {
+                    "v_phase_lim" : [float(self.vMin_edt.text()), float(self.vMax_edt.text())],
+                    "freq_lim" : [float(self.fMin_edt.text()), float(self.fmax_edt.text())]
+            }
+            disper_peak = json.dumps(disper_peakdata) 
+            with open("log/disper_peaks.json", "w") as f:
+                f.write(disper_peak)
+                f.close()
 
-        srcDictFile = self.ROOT+"/gatherdata/srcdata.json"
-        traceDictFile = self.ROOT+"/gatherdata/trcdata.json"
-        if os.path.exists(srcDictFile) and os.path.exists(traceDictFile):
-            gatherDict_f = open(srcDictFile, "r")
-            traceDict_f = open(traceDictFile, "r")
-            gatherDict = json.load(gatherDict_f)["gather_dict"]
-            traceDict  = json.load(traceDict_f)["TraceData"]
-            
-            self.Disptask = threads.DispersionThread(dispdata=dispdata, gatherDict=gatherDict, traceDict=traceDict, sint=0.001)
-            self.Disptask.start()
-            self.Disptask.setplot.connect(self.setDispPlots) 
-            self.Disptask.thread_msg.connect(self.statusBar.showMessage)    
-            self.Disptask.sindx.connect(self.setslocnmaxsloc)
+            srcDictFile = self.ROOT+"/gatherdata/srcdata.json"
+            traceDictFile = self.ROOT+"/gatherdata/trcdata.json"
+            if os.path.exists(srcDictFile) and os.path.exists(traceDictFile):
+                gatherDict_f = open(srcDictFile, "r")
+                traceDict_f = open(traceDictFile, "r")
+                gatherDict = json.load(gatherDict_f)["gather_dict"]
+                traceDict  = json.load(traceDict_f)["TraceData"]
 
+                self.Disptask = threads.DispersionThread(dispdata=dispdata, gatherDict=gatherDict, 
+                                    traceDict=traceDict, filterWidth=self.filterWidth.value(), sint=0.001)
+                self.Disptask.start()
+                self.Disptask.setplot.connect(self.setDispPlots) 
+                self.Disptask.thread_msg.connect(self.statusBar.showMessage)    
+                self.Disptask.sindx.connect(self.setslocnmaxsloc)
+                self.Disptask.endprocss.connect(self.endDisp)
 
+                self.doDisp_btn.setText("Stop\nProcess")
+                self.doDisp_btn.setStyleSheet("font: 75 11pt \"Calibri\";\n"
+                                            "background: rgb(255, 150, 190)")
+                self.start_dispersion = False
+
+            else:
+                self.statusBar.showMessage("No data found !!")
         else:
-            self.statusBar.showMessage("No data found !!")
+            self.Disptask.stop()
+            self.endDisp()
+
+        
+    def endDisp(self):
+        # make "Generate Dispersion Curves" btn to initial stage
+        self.doDisp_btn.setText("Generate\nDispersion Curves")
+        self.doDisp_btn.setStyleSheet("font: 75 11pt \"Calibri\";\n"
+"background: rgb(85, 255, 127)")
+        self.start_dispersion = True
         
     def setslocnmaxsloc(self, lst):
         self.sourcelocs = lst
@@ -368,7 +400,7 @@ class Main(QMainWindow, Ui_MainWindow):
         dcw = self.DisperCurve_Canvas.viewport().width()
         dch = self.DisperCurve_Canvas.viewport().height()
 
-        fnames = [dir + "/src-"+ sloc + ".png" for dir in dirs]
+        fnames = [f"{dir}/src-{sloc}.png" for dir in dirs]
 
         self.loca_edt.setText(sloc)
         
@@ -382,10 +414,8 @@ class Main(QMainWindow, Ui_MainWindow):
         
         pixmap_2 = QPixmap(fnames[1])
         pixmap_2 = pixmap_2.scaledToHeight(dch-10)
-        #print(pixmap_2.width(), pixmap_2.height())
         self.DisperCurve_Canvaslabel.resize(pixmap_2.width()+2 , dch-10)
         self.DisperCurve_Canvaslabel.setPixmap(pixmap_2)
-        #self.gridLayout_dd.addWidget(self.DisperCurve_Canvaslabel) #, 0, 0) 
         if (dcw+10) > pixmap_2.width():
             self.verticalLayout_6.setContentsMargins((dcw+10 - pixmap_2.width())//2, 5, 5, 5)
 
@@ -406,17 +436,21 @@ class Main(QMainWindow, Ui_MainWindow):
         set dispersion plots to traces_Canv, geomCanv, dispCurveCanv 
         this frames
         """
-        if self.slocindx<self.maxsrcs:
-            self.slocindx += 1   
-            print(f"disnexet if{self.slocindx}")            
-            self.setDispPlots(self.sourcelocs[self.slocindx])
-            
+        try:
+            if self.slocindx<self.maxsrcs-1:
+                self.slocindx += 1   
+                print(f"disnexet if{self.slocindx}")            
+                self.setDispPlots(self.sourcelocs[self.slocindx])
 
-        else:
-            self.slocindx=1
-            self.setDispPlots(self.sourcelocs[self.slocindx])
-            print(f"disnexet if flase{self.slocindx}")    
-        pass
+
+            else:
+                self.slocindx=1
+                self.setDispPlots(self.sourcelocs[self.slocindx])
+                print(f"disnexet if flase{self.slocindx}")    
+            pass
+        except:
+            print("Error occured at disNext()")
+            self.statusBar.showMessage("No Source locations registered!!")
 
     def disPrev(self):
         """
@@ -425,30 +459,50 @@ class Main(QMainWindow, Ui_MainWindow):
         set dispersion plots to traces_Canv, geomCanv, dispCurveCanv 
         this frames
         """
-        if self.slocindx>1:
-            
-            self.slocindx -= 1   
-            print(self.slocindx)         
-            self.setDispPlots(self.sourcelocs[self.slocindx])
-        else:
-            self.slocindx=self.maxsrcs-1
-            self.setDispPlots(self.sourcelocs[self.slocindx])
-            print(f"disprev if{self.slocindx}")    
-        pass
+        try:
+            if self.slocindx>1:
+
+                self.slocindx -= 1   
+                print(self.slocindx)         
+                self.setDispPlots(self.sourcelocs[self.slocindx])
+            else:
+                self.slocindx=self.maxsrcs-1
+                self.setDispPlots(self.sourcelocs[self.slocindx])
+                print(f"disprev if{self.slocindx}")    
+        except:
+            print("Error occured at disPrev()")
+            self.statusBar.showMessage("No Source locations registered!!")
 # --------------------------------------------------------------#
 ################## Inversion functionality ######################
 # --------------------------------------------------------------#
 
     def StartInversion(self):
         self.statusBar.showMessage("%")        
-        print(self.optimType_comb.currentText())
-        self.inversion = threads.InversionThread(method=self.optimType_comb.currentText(),
-                                 maxrun=self.numIter_spin.value(), root=self.ROOT)
-        self.inversion.start()
-        self.inversion.thread_msg.connect(self.statusBar.showMessage)
-        self.inversion.imgnames.connect(self.setInversionPlot)
-        self.inversion.sindx.connect(self.setslocnmaxsloc)
-    
+        #print(self.optimType_comb.currentText())
+        if self.start_inv:
+            self.inversion = threads.InversionThread(method=self.optimType_comb.currentText(),
+                                     maxrun=self.numIter_spin.value(), root=self.ROOT)
+            self.inversion.start()
+            self.inversion.thread_msg.connect(self.statusBar.showMessage)
+            self.inversion.imgnames.connect(self.setInversionPlot)
+            self.inversion.sindx.connect(self.setslocnmaxsloc)
+            self.inversion.endprocss.connect(self.endINV)
+            self.doInv_btn.setText("Stop Inversion")
+            self.doInv_btn.setStyleSheet("font: 75 11pt \"Calibri\";\n"
+"background: rgb(255, 150, 190)")
+            self.start_inv = False
+
+        else:
+            self.inversion.stop()
+            self.endINV()
+            
+            
+    def endINV(self):
+        self.doInv_btn.setText("Start Inversion")
+        self.doInv_btn.setStyleSheet("font: 75 11pt \"Calibri\";\n"
+                            "background: rgb(85, 255, 127)")
+        self.start_inv = True
+
     def setInversionPlot(self, fllist):
         """     index   string type
         fllist: 0:      source loca (str)
@@ -461,23 +515,23 @@ class Main(QMainWindow, Ui_MainWindow):
                 0:      source loca (str)
         """
         if len(fllist)==1:
-            dirs = [self.ROOT+"/inversion/model", self.ROOT+"/inversion/misfit", 
-                    self.ROOT+"/inversion/curve", self.ROOT+"/inversion/model/vp",
-                    self.ROOT+"/inversion/model/vs", self.ROOT+"/inversion/model/rh"]
-            fllist = []
+            dirs = [self.ROOT+"/inversion/model/vp", self.ROOT+"/inversion/model/vs", 
+                    self.ROOT+"/inversion/model/rho",
+                    self.ROOT+"/inversion/misfit", self.ROOT+"/inversion/curve"]
             for d in dirs:
                 fllist.append(f"{d}/{d.split('/')[-1]}_{fllist[0]}.png")
-        mdfh = self.scrollArea_4.viewport().height()
+        mdfw = self.scrollArea_4.viewport().width()
         dcfh = self.scrollArea_6.viewport().height()
         mffh = self.scrollArea_7.viewport().height()
 
         modlist = [self.Modellabel0, self.Modellabel1, self.Modellabel2]
+        layout = [self.verticalLayout_14, self.verticalLayout_15, self.verticalLayout_16]
         # source loca in line edit
         self.lineEdit_12.setText(fllist[0])
         # curve
         pixmap_1 = QPixmap(fllist[5])
         pixmap_1 = pixmap_1.scaledToHeight(dcfh-10)
-        print(f"curve: w {pixmap_1.width()}, h {pixmap_1.height()}")
+        #print(f"curve: w {pixmap_1.width()}, h {pixmap_1.height()}")
         self.dispCanv_2.resize(pixmap_1.width(), pixmap_1.height())
         self.dispCanv_2.setPixmap(pixmap_1)
         #self.gridLayout_td.addWidget(self.traces_Canvlabel) #, rnum, cnum) 
@@ -485,7 +539,7 @@ class Main(QMainWindow, Ui_MainWindow):
         # misfit
         pixmap_2 = QPixmap(fllist[4])
         pixmap_2 = pixmap_2.scaledToHeight(mffh-10)
-        print(f"misfit: w {pixmap_2.width()}, h {pixmap_2.height()}")
+        #print(f"misfit: w {pixmap_2.width()}, h {pixmap_2.height()}")
         self.misfitCanv.resize(pixmap_2.width(), pixmap_2.height())
         self.misfitCanv.setPixmap(pixmap_2)
 
@@ -496,33 +550,40 @@ class Main(QMainWindow, Ui_MainWindow):
 
             modlist[m].resize(pixmap.width(), pixmap.height())
             modlist[m].setPixmap(pixmap)
-        print(pixmap.width(), pixmap.height())
+            if (mdfw+10) > pixmap.width():
+                layout[m].setContentsMargins((mdfw+10 - pixmap.width())//2, 5, 5, 5)
+
+        #print(pixmap.width(), pixmap.height())
             
-        #if (dcw+10) > pixmap_2.width():
-        #    self.verticalLayout_6.setContentsMargins((dcw+10 - pixmap_2.width())//2, 5, 5, 5)
 
 
     def invNxt(self):
-        if self.slocindx<self.maxsrcs:
-            self.slocindx += 1   
-            #print(f"disnexet if{self.slocindx}")            
-            self.setInversionPlot([self.sourcelocs[self.slocindx]])       
-        else:
-            self.slocindx=1
-            self.setInversionPlot([self.sourcelocs[self.slocindx]])
-            #print(f"disnexet if flase{self.slocindx}")    
-        pass
+        try:
+            if self.slocindx<self.maxsrcs-1:
+                self.slocindx += 1   
+                #print(f"disnexet if{self.slocindx}")            
+                self.setInversionPlot([self.sourcelocs[self.slocindx]])       
+            else:
+                self.slocindx=1
+                self.setInversionPlot([self.sourcelocs[self.slocindx]])
+                #print(f"disnexet if flase{self.slocindx}")    
+        except:
+            print("Error occured at invNxt()")
+            self.statusBar.showMessage("No Source locations registered!!")
 
     def invPrev(self):
-        if self.slocindx>1:
-            self.slocindx -= 1   
-            #print(self.slocindx)         
-            self.setDispPlots([self.sourcelocs[self.slocindx]])
-        else:
-            self.slocindx=self.maxsrcs-1
-            self.setDispPlots([self.sourcelocs[self.slocindx]])
-            #print(f"disprev if{self.slocindx}")    
-        pass
+        try:
+            if self.slocindx>1:
+                self.slocindx -= 1   
+                #print(self.slocindx)         
+                self.setInversionPlot([self.sourcelocs[self.slocindx]])
+            else:
+                self.slocindx=self.maxsrcs-1
+                self.setInversionPlot([self.sourcelocs[self.slocindx]])
+                #print(f"disprev if{self.slocindx}")    
+        except:
+            print("Error occured at invPrev()")
+            self.statusBar.showMessage("No Source locations registered!!")
 # --------------------------------------------------------------#
 ################## 2D Inversion functionality ####################
 # --------------------------------------------------------------#
