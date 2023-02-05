@@ -23,7 +23,7 @@ setup(
                 "modswpro.modwavefieldtransforms","modswpro.modsensor1C", "modswpro.modmasw", "modswpro.modarray1D",
                 "plugin.manpikwtk", "plugin.maswGui", "plugin.preferWin", "plugin.setModel"],             # Name of the python package
     package_dir={'':'surfwaver'},     # Directory of the source code of the package
-    install_requires=["obspy", "PyQt5", "swprocess", "numpy", "scipy", "matplotlib", "evodcinv" ],
+    install_requires=["obspy", "PyQt5", "attrdict", "swprocess", "numpy", "scipy", "matplotlib", "evodcinv" ],
     keywords=['MASW', 'Multichannel Analysis of Surface Waves', 'Dispersion', 'Inversion', 'seismic', 'active and passive surface wave', "SurfWaveR" ],
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
