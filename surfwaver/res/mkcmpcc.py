@@ -70,7 +70,7 @@ class CMPCC():
                 # Sample Interval and unit
                 if soi==-1:
                     if segyfile:
-                        self.sint=float(f[0].stats.segy.trace_header.sample_interval_in_ms_for_this_trace) # * 10**(-6) #  why i did this i don't know?...
+                        self.sint=float(f[0].stats.segy.trace_header.sample_interval_in_ms_for_this_trace) * 10**(-6) #  it will convert time from microsec to sec?...
                     else:
                         self.sint=float(f[0].stats.seg2['SAMPLE_INTERVAL'])
                         self.unit = f[0].stats.seg2.UNITS

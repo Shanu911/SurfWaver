@@ -72,19 +72,19 @@ class InversionThread(QtCore.QThread):
         except:
             self.thread_msg.emit("model_params.json file not found")  
             time.sleep(0.005)
-            raise "model_params.json file not found"
+            print("model_params.json file not found, set model parameters first")
     
     def run(self):
         self._go = True
         
-        try:            
+        try:                    
             f = open(self.ROOT + "/inversion/inver.json", "r")
             inverdata = json.load(f)
             f.close()
-
             self.slocs = list(inverdata.keys()) 
             self.vels = []
             self.pers = []
+            
             for l in self.slocs:
                 d = inverdata[l]
                 if 0 not in d['frequency']:
@@ -100,8 +100,6 @@ class InversionThread(QtCore.QThread):
                 self.vels.append(velocity)
                 self.pers.append(period)
             self.thread_msg.emit("Inversion process initiated")   
-
-
             th, vs, nu = self.getZnVS()
             iframeData = self.prefdata.iframe
             dirs = [self.ROOT+"/inversion/model", self.ROOT+"/inversion/misfit", 
@@ -109,10 +107,8 @@ class InversionThread(QtCore.QThread):
                     self.ROOT+"/inversion/model/vs", self.ROOT+"/inversion/model/rho"]
             for dirc in dirs:
                 if not os.path.exists(dirc): os.mkdir(dirc)
-
             self.thread_msg.emit("folder creation done")        
             inverRes = dict()
-
             for i in range(len(self.slocs)):
                 if self._go:
                     tmpdict = {
@@ -125,7 +121,6 @@ class InversionThread(QtCore.QThread):
                     self.model = EarthModel()            
                     for l in range(len(th)):
                         self.model.add(Layer(th[l], vs[l], nu[l]))
-
                     self.model.configure(
                     optimizer=self.method,  # Evolutionary algorithm
                     misfit="rmse",  # Misfit function type
@@ -147,7 +142,6 @@ class InversionThread(QtCore.QThread):
                         res.plot_model(parameter='vp', ax=ax)
                     figvp.tight_layout()
                     figvp.savefig(fnames[-1])
-
                     #  s-wave velocity model
                     figvs, ax = plt.subplots(figsize=(iframeData.model.w, 
                                 iframeData.model.h), dpi=iframeData.model.dpi)
@@ -156,7 +150,6 @@ class InversionThread(QtCore.QThread):
                         res.plot_model(parameter='vs', ax=ax)
                     figvs.tight_layout()
                     figvs.savefig(fnames[-1])
-
                     #  density model
                     figrh, ax = plt.subplots(figsize=(iframeData.model.w, 
                                 iframeData.model.h), dpi=iframeData.model.dpi)
@@ -165,7 +158,6 @@ class InversionThread(QtCore.QThread):
                         res.plot_model(parameter='rho', ax=ax)
                     figrh.tight_layout()
                     figrh.savefig(fnames[-1])
-
                     # misfits
                     figmfit, ax = plt.subplots(figsize=(iframeData.misfit.w, 
                                     iframeData.misfit.h), dpi=iframeData.misfit.dpi)
@@ -174,7 +166,6 @@ class InversionThread(QtCore.QThread):
                         res.plot_misfit(ax=ax)
                     figmfit.tight_layout()
                     figmfit.savefig(fnames[-1])
-
                     # curve
                     figcurve, ax = plt.subplots(figsize=(iframeData.dispCurve.w, 
                                     iframeData.dispCurve.h), dpi=iframeData.dispCurve.dpi)
@@ -186,24 +177,18 @@ class InversionThread(QtCore.QThread):
                                 ax=ax, plot_args={"xaxis": "frequency","type": "semilogx"})
                     figcurve.tight_layout()
                     figcurve.savefig(fnames[-1])
-
-
                     print(fnames)
-
                     for res in self.res:
                         for j in range(len(th)):
                             inverRes[self.slocs[i]]["z"].append(round(res.model[j][0], 5))
                             inverRes[self.slocs[i]]["vp"].append(round(res.model[j][1], 5))
                             inverRes[self.slocs[i]]["vs"].append(round(res.model[j][2], 5))
                             inverRes[self.slocs[i]]["rh"].append(round(res.model[j][3], 5))
-
                     self.imgnames.emit(fnames)            
-
                     time.sleep(0.01)
                 else:
                     break
                 
-
             jobj = json.dumps(inverRes)
             inverResfile = self.ROOT+"/inversion/inverRes.json"
             with open(inverResfile, "w") as f:
@@ -513,6 +498,15 @@ class ApplyThread(QtCore.QThread):
         ns = number of samples in each trace
         ntr = number of traces in cmpcc gather
         """
+        logdata = {
+            "sint": sint,"ns": ns,"gtype": self.gType,
+            "v_phase_lim": [100.0, 500.0], "freq_lim": [1.0, 100.0]
+        }
+
+        logdata_jobj = json.dumps(logdata)
+        with open(self.ROOT+"/logdata.json", "w") as f:
+            f.write(logdata_jobj)
+            f.close()
         time.sleep(0.005)        
         self.thread_msg.emit("Apply successful")
         self.file_info.emit({"flg4": flg4,"sint": sint,"ns": ns,"ntr": ntr })
@@ -523,12 +517,12 @@ class GatherImgThread(QtCore.QThread):
     thread_msg = QtCore.pyqtSignal(str)
     fnameEmit = QtCore.pyqtSignal(str, int, int, int) 
 
-    def __init__(self,num_of_plots_in_a_Row, gatherDict, traceDict, gtype, sampSize, Sint, root="tmp", parent=None):
+    def __init__(self,num_of_plots_in_a_Row, gatherDict, traceDict, gtype, sampSize, Sint, parent=None):
         """
         canvas : gatherGraphicsView
         gatherDict: gather dictionary
         traceDict : trace dictionary
-        gtype: gather type
+        gtype: gather type;  0-> cmpccgather;   1-> shot gather
         samSize : number of samples
         Sint : sampling interval
         """
@@ -539,13 +533,15 @@ class GatherImgThread(QtCore.QThread):
         self.gtype = gtype
         self.sampsize= sampSize
         self.sint=Sint
-        self.ROOT = root
+        self.prfdata = Prefdata()
+        self.ROOT = self.prfdata.gframe.rootdir
+        
         self.flder=self.ROOT+"/gathers_img"
         if not os.path.exists(self.flder):
             os.mkdir(self.flder)
-        self.ampfactor = 1
+        self.ampfactor = 5
         self.unit = "meter"        
-        self.prfdata = Prefdata()
+        
         
 
     def run(self):
@@ -571,10 +567,12 @@ class GatherImgThread(QtCore.QThread):
 
             ax.invert_yaxis()
             ax.xaxis.tick_top()
-            if self.gtype==0:
+            if self.gtype==1:
                 labels = ["Reciver location", "Source location at ", "/cmp-"]
-            else:
+            elif self.gtype==0:
                 labels = ["Spacing", "CMP location at ", "/cmpcc-"]
+            else:
+                raise ValueError
             ax.set_ylabel("Time (s)")
             ax.set_xlabel(labels[0])
             ax.set_title(labels[1]+str(src)+" "+self.unit)
@@ -686,23 +684,28 @@ class fftImgThread(QtCore.QThread):
             
             rcvrs = self.gatherDict[src]
             color = cm.rainbow(np.linspace(0, 1, len(rcvrs)))
-            if self.gtype==0:
+            if self.gtype==1:
                 labels = ["Reciver at", "Source location at ", "/cmp-"]
-            else:
+            elif self.gtype==0:
                 labels = ["Spacing", "CMP location at ", "/cmpcc-"]
-
+            else:
+                raise ValueError
             traceData = np.array(self.traceDict[i][0]) 
             ffttraceData = rfft(traceData)
-            ffttraceDataMeg0 = abs(ffttraceData)[:200]
-            freqx = rfftfreq(traceData.size, self.sint)[:200]    
+            freqx = rfftfreq(traceData.size, self.sint)
+            index = np.where(freqx >= 120)[0][0]
+            freqx = freqx[:index]
+
+            ffttraceDataMeg0 = abs(ffttraceData)[:index]
+            
 
             ax.plot(freqx, (20*np.log10(ffttraceDataMeg0/ max(ffttraceDataMeg0))  - 0), color=color[0], label=f'{labels[0]}: {rcvrs[0]}', linewidth="0.8")
              
 
-            for k in range(len(rcvrs)):
+            for k in range(1, len(rcvrs)):
                 traceData = np.array(self.traceDict[i][k])     
                 ffttraceData = rfft(traceData)
-                ffttraceDataMeg = abs(ffttraceData)[:200]
+                ffttraceDataMeg = abs(ffttraceData)[:index]
 
                 ax.plot(freqx, (20*np.log10(ffttraceDataMeg/ max(ffttraceDataMeg))  - 0), color=color[k], label=f'{labels[0]}: {rcvrs[k]}', linewidth="0.8")
                 ffttraceDataMeg0 = (ffttraceDataMeg0 + ffttraceDataMeg)/2
