@@ -87,7 +87,7 @@ class Main(QMainWindow, Ui_MainWindow):
         self.Zmin_2.clicked.connect(self.zoomin_1)
         self.Zmot_2.clicked.connect(self.zoomout_1)
         self.Show_btn_2.clicked.connect(self.plotCMPCCAquGeom)
-        self.Show_btn_3.clicked.connect(self.ShowGather)
+        self.Show_btn_3.clicked.connect(self.ShowGather)        
         self.Show_btn_4.clicked.connect(self.ShowAmpSpecGather)
         self.doDisp_btn.clicked.connect(self.generateDispersion)
         self.setrModelParam_btn.clicked.connect(self.setModelParam)
@@ -138,7 +138,23 @@ class Main(QMainWindow, Ui_MainWindow):
         self.ROOT = self.pref.getrootdir()
 
         self.start_dispersion =True
+        self.gType = 0
+        self.ns = 0
+        self.sint = 0
 
+
+    def setSintNsGtype(self):
+        try:
+            with open(self.ROOT+"/logdata.json", "r") as f:
+                jobj = json.load(f)
+                f.close()
+                self.ns = jobj["ns"]
+                self.sint = jobj["sint"]
+                self.gType = jobj["gtype"]
+        except:
+            print("logdata.json fie not found!!")
+            raise FileNotFoundError
+        
 
     def setModelParam(self):
         if self.numLay_spin.value() >=2: 
@@ -182,6 +198,7 @@ class Main(QMainWindow, Ui_MainWindow):
 
     def apply(self):
         self.gType = self.GatherComboBox.currentIndex()         #gtype: 0-> CMPCC 1-> CMP
+        print(self.gType)
         self.task = threads.ApplyThread(self.filePaths, self.gType)
         self.task.start()
         self.task.thread_msg.connect(self.statusBar.showMessage)
@@ -248,6 +265,8 @@ class Main(QMainWindow, Ui_MainWindow):
 
     def ShowGather(self):
         self.labelNames = []        
+        if (self.ns==0 or self.sint== 0):
+            self.setSintNsGtype()
         
         W = self.gatherScrollArea.viewport().width()
         self.w, num_of_plots_in_a_Row = findWidth(W, 400)
@@ -260,7 +279,9 @@ class Main(QMainWindow, Ui_MainWindow):
             gatherDict = json.load(gatherDict_f)["gather_dict"]
             traceDict  = json.load(traceDict_f)["TraceData"]
             
-            self.gatherTask = threads.GatherImgThread(num_of_plots_in_a_Row=num_of_plots_in_a_Row,gatherDict=gatherDict, traceDict=traceDict, gtype=1, sampSize=1500, Sint=0.001) #self.gType, sampSize=self.ns , Sint=self.sint)
+            self.gatherTask = threads.GatherImgThread(num_of_plots_in_a_Row=num_of_plots_in_a_Row, 
+                                gatherDict=gatherDict, traceDict=traceDict, gtype=self.gType, sampSize=self.ns , 
+                                Sint=self.sint)         # 1, sampSize=self.ns, Sint=0.001) #
             self.gatherTask.start()
             self.gatherTask.fnameEmit.connect(self.setPlotinGatherCanvas)
             self.gatherTask.thread_msg.connect(self.statusBar.showMessage)
@@ -288,7 +309,8 @@ class Main(QMainWindow, Ui_MainWindow):
 
     def ShowAmpSpecGather(self):
         self.labelNames = []
-        
+        if (self.ns==0 or self.sint==0):
+            self.setSintNsGtype()
         
         W = self.ampSpecScrollArea.viewport().width()
         self.w, num_of_plots_in_a_Row = findWidth(W, 800)
@@ -301,7 +323,10 @@ class Main(QMainWindow, Ui_MainWindow):
             gatherDict = json.load(gatherDict_f)["gather_dict"]
             traceDict  = json.load(traceDict_f)["TraceData"]
 
-            self.ampSpecTask = threads.fftImgThread(num_of_plots_in_a_Row=num_of_plots_in_a_Row,gatherDict=gatherDict, traceDict=traceDict, gtype=1, sampSize=1500, Sint=0.001) #self.gType, sampSize=self.ns , Sint=self.sint)
+            self.ampSpecTask = threads.fftImgThread(num_of_plots_in_a_Row=num_of_plots_in_a_Row,
+                        gatherDict=gatherDict, traceDict=traceDict, 
+                        gtype=self.gType, sampSize=self.ns , Sint=self.sint)
+                            #1, sampSize=1500, Sint=0.001) #
             self.ampSpecTask.start()
             self.ampSpecTask.fnameEmit.connect(self.setPlotinAmpSpecCanvas)
             self.ampSpecTask.thread_msg.connect(self.statusBar.showMessage)
@@ -343,15 +368,22 @@ class Main(QMainWindow, Ui_MainWindow):
                 "transform": self.TransformType.currentText(), "noise_end":float(self.nEnd_edt.text()),
                 "vspace":self.vspace_edt.currentText(),"nvel": 400, "mintrace":self.minTraces.value()
             }
+            
+            try:
+                with open(self.ROOT + "/logdata.json", "r") as f:
+                    logdata = json.load(f)
+                    logdata["v_phase_lim"] = [float(self.vMin_edt.text()), float(self.vMax_edt.text())]
+                    logdata["freq_lim"] = [float(self.fMin_edt.text()), float(self.fmax_edt.text())]
+                    new_logdata = json.dumps(logdata)
+                    f.close()
 
-            disper_peakdata = {
-                    "v_phase_lim" : [float(self.vMin_edt.text()), float(self.vMax_edt.text())],
-                    "freq_lim" : [float(self.fMin_edt.text()), float(self.fmax_edt.text())]
-            }
-            disper_peak = json.dumps(disper_peakdata) 
-            with open("log/disper_peaks.json", "w") as f:
-                f.write(disper_peak)
-                f.close()
+                with open(self.ROOT + "/logdata.json", "w") as f:            
+                    f.write(new_logdata)
+                    f.close()
+            except:
+                print("logdata file not found!!")
+                raise FileNotFoundError()
+                
 
             srcDictFile = self.ROOT+"/gatherdata/srcdata.json"
             traceDictFile = self.ROOT+"/gatherdata/trcdata.json"
@@ -362,7 +394,8 @@ class Main(QMainWindow, Ui_MainWindow):
                 traceDict  = json.load(traceDict_f)["TraceData"]
 
                 self.Disptask = threads.DispersionThread(dispdata=dispdata, gatherDict=gatherDict, 
-                                    traceDict=traceDict, filterWidth=self.filterWidth.value(), sint=0.001)
+                                    traceDict=traceDict, filterWidth=self.filterWidth.value(), 
+                                    sint=logdata["sint"])
                 self.Disptask.start()
                 self.Disptask.setplot.connect(self.setDispPlots) 
                 self.Disptask.thread_msg.connect(self.statusBar.showMessage)    
@@ -602,56 +635,58 @@ class Main(QMainWindow, Ui_MainWindow):
             canvas[i].setPixmap(pixmap)
 
 
-class GatherImages(QtCore.QThread):
-
-    def __init__(self, gatherDict, traceDict, gtype, sampSize, Sint,parent=None):
-        super().__init__(parent)
-        self.gatherDict = gatherDict
-        self.traceDict = traceDict
-        self.gType = gtype
-        self.sampsize= sampSize
-        self.sint=Sint
-        self.flder=self.ROOT+"/gathers_img"
-        self.ampfactor = 1
-
-    def GeneratePlot(self):
-        source = list(self.gatherDict.keys())
-        t = np.arange(0, self.sampsize*self.sint, self.sint)
-
-        for i in range(source):
-            fig, ax = plt.subplots(figsize=(10,5))
-
-            rcvrs = self.gatherDict[source[i]]
-            for k in range(len(rcvrs)):
-                traceData = np.array(self.traceDict[i][k])                
-                traceData = ( traceData + rcvrs[k])*self.ampfactor
-                ax.fill_between(t,rcvrs[k], traceData, where=traceData>rcvrs[k], interpolate=True, color="black")
-                ax.grid(linestyle="--", linewidth="1", color="g")
-                ax.set_xlim([np.min(t), np.max(t)])
-                
-            if self.gtype==0:
-                labels = ["Reciver location", "Source location ", "/cmp-"]
-            else:
-                labels = ["Spacing in ", "CMP location ", "/cmpcc-"]
-
-            ax.set_xlabel("Time")
-            ax.set_ylabel(labels[0]+self.unit)
-            ax.set_title(labels[1]+str(source[i])+self.unit)
-            #ax.grid()
-            fname = self.flder+labels[2]+str(source[i])+".png"
-            fig.savefig(fname)
-
-    def ampUp(self):
-        self.ampfactor += 1
-        self.GeneratePlot()
-
-    def ampDown(self):
-        self.ampfactor += 1
-        self.GeneratePlot()
-
-    def setInCanvas(self):
-        pass
-    
+#class GatherImages(QtCore.QThread):
+#
+#    def __init__(self, gatherDict, traceDict, gtype, sampSize, Sint,parent=None):
+#        super().__init__(parent)
+#        self.gatherDict = gatherDict
+#        self.traceDict = traceDict
+#        self.gType = gtype
+#        self.sampsize= sampSize
+#        self.sint=Sint
+#        self.flder=self.ROOT+"/gathers_img"
+#        self.ampfactor = 1
+#
+#    def GeneratePlot(self):
+#        source = list(self.gatherDict.keys())
+#        t = np.arange(0, self.sampsize*self.sint, self.sint)
+#
+#        for i in range(source):
+#            fig, ax = plt.subplots(figsize=(10,5))
+#
+#            rcvrs = self.gatherDict[source[i]]
+#            for k in range(len(rcvrs)):
+#                traceData = np.array(self.traceDict[i][k])                
+#                traceData = ( traceData + rcvrs[k])*self.ampfactor
+#                ax.fill_between(t,rcvrs[k], traceData, where=traceData>rcvrs[k], interpolate=True, color="black")
+#                ax.grid(linestyle="--", linewidth="1", color="g")
+#                ax.set_xlim([np.min(t), np.max(t)])
+#                
+#            if self.gtype==0:
+#                labels = ["Reciver location", "Source location ", "/cmp-"]
+#            elif self.gtype==1:
+#                labels = ["Spacing in ", "CMP location ", "/cmpcc-"]
+#            else:
+#                raise ValueError()
+#
+#            ax.set_xlabel("Time")
+#            ax.set_ylabel(labels[0]+self.unit)
+#            ax.set_title(labels[1]+str(source[i])+self.unit)
+#            #ax.grid()
+#            fname = self.flder+labels[2]+str(source[i])+".png"
+#            fig.savefig(fname)
+#
+#    def ampUp(self):
+#        self.ampfactor += 1
+#        self.GeneratePlot()
+#
+#    def ampDown(self):
+#        self.ampfactor += 1
+#        self.GeneratePlot()
+#
+#    def setInCanvas(self):
+#        pass
+#    
 
 
 
