@@ -84,7 +84,7 @@ class InversionThread(QtCore.QThread):
             self.slocs = list(inverdata.keys()) 
             self.vels = []
             self.pers = []
-            
+
             for l in self.slocs:
                 d = inverdata[l]
                 if 0 not in d['frequency']:
@@ -539,7 +539,6 @@ class GatherImgThread(QtCore.QThread):
         self.flder=self.ROOT+"/gathers_img"
         if not os.path.exists(self.flder):
             os.mkdir(self.flder)
-        self.ampfactor = 5
         self.unit = "meter"        
         
         
@@ -557,8 +556,10 @@ class GatherImgThread(QtCore.QThread):
 
             rcvrs = self.gatherDict[src]
             for k in range(len(rcvrs)):
+                amplitude_scale = np.mean(np.diff(rcvrs))/2
+
                 traceData = np.array(self.traceDict[i][k])
-                traceData = (self.ampfactor  * traceData / max(traceData)) + rcvrs[k]
+                traceData = (amplitude_scale  * traceData / max(traceData)) + rcvrs[k]
 
                 ax.plot(traceData,t, 'k', linewidth="0.5")
                 ax.fill_betweenx(t, rcvrs[k], x2=traceData, where=traceData>rcvrs[k], interpolate=True, color="black")
